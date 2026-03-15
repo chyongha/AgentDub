@@ -95,8 +95,7 @@ export function Navbar() {
                     alt={session.user.name ?? "User"}
                     width={28}
                     height={28}
-                    className="rounded-full ring-1"
-                    style={{ ringColor: "var(--color-border)" }}
+                    className="rounded-full ring-1 ring-white/10"
                   />
                 ) : (
                   <div
