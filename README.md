@@ -79,7 +79,7 @@
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/chyongha/AgentDub-.git
+git clone https://github.com/chyongha/AgentDub.git
 cd agentdub
 ```
 
@@ -272,7 +272,7 @@ Download dubbed MP3
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/chyongha/AgentDub-.git
+git clone https://github.com/chyongha/AgentDub.git
 cd agentdub
 ```
 
