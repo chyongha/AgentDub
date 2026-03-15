@@ -90,3 +90,49 @@ export async function addToWhitelist(email: string): Promise<void> {
     args: [email],
   });
 }
+
+// ── Dub history helpers ───────────────────────────────────────────────────────
+
+export async function saveDubRecord(
+  userEmail: string,
+  filename: string,
+  targetLang: string,
+  fileSize: number
+): Promise<void> {
+  // Ensure table exists (safe to call multiple times)
+  await getDb().execute(`
+    CREATE TABLE IF NOT EXISTS dub_history (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_email  TEXT NOT NULL COLLATE NOCASE,
+      filename    TEXT NOT NULL,
+      target_lang TEXT NOT NULL,
+      file_size   INTEGER,
+      created_at  INTEGER DEFAULT (unixepoch())
+    )
+  `);
+
+  await getDb().execute({
+    sql: `INSERT INTO dub_history (user_email, filename, target_lang, file_size) VALUES (?, ?, ?, ?)`,
+    args: [userEmail, filename, targetLang, fileSize],
+  });
+}
+
+export async function getDubHistory(userEmail: string) {
+  // Ensure table exists before querying
+  await getDb().execute(`
+    CREATE TABLE IF NOT EXISTS dub_history (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_email  TEXT NOT NULL COLLATE NOCASE,
+      filename    TEXT NOT NULL,
+      target_lang TEXT NOT NULL,
+      file_size   INTEGER,
+      created_at  INTEGER DEFAULT (unixepoch())
+    )
+  `);
+
+  const result = await getDb().execute({
+    sql: `SELECT * FROM dub_history WHERE user_email = ? ORDER BY created_at DESC LIMIT 50`,
+    args: [userEmail],
+  });
+  return result.rows;
+}
