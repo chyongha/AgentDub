@@ -1,7 +1,7 @@
 # AgentDub 🎙️
 
 > AI 기반 오디오 더빙 플랫폼 | AI-Powered Audio Dubbing Platform
-Live App: agent-dub.vercel.app
+> Live App: [Live Demo | 라이브 데모](agent-dub.vercel.app)
 ---
 
 # 🇰🇷 한국어
